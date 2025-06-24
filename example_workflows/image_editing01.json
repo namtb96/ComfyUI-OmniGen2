@@ -1,0 +1,229 @@
+{
+  "id": "3fdf3af1-aee2-4923-ac47-097fbe85f4c2",
+  "revision": 0,
+  "last_node_id": 12,
+  "last_link_id": 21,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "SaveImage",
+      "pos": [
+        1276.9300537109375,
+        222.86000061035156
+      ],
+      "size": [
+        270,
+        270
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 20
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.40",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "OmniGen2"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": [
+        321.29998779296875,
+        414.1000061035156
+      ],
+      "size": [
+        270,
+        314
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            19
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.40",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "yellow_girl.png",
+        "image"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "OmniGen2ModelLoader",
+      "pos": [
+        308.5,
+        206.5
+      ],
+      "size": [
+        329.92578125,
+        154
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OMNIGEN2MODEL",
+          "type": "OMNIGEN2MODEL",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "neverbiasu/ComfyUI-OmniGen2",
+        "ver": "unknown",
+        "Node name for S&R": "OmniGen2ModelLoader"
+      },
+      "widgets_values": [
+        "OmniGen2/OmniGen2",
+        "bf16",
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": 12,
+      "type": "OmniGen2Sampler",
+      "pos": [
+        844.5,
+        199.5
+      ],
+      "size": [
+        400,
+        484
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "omnigen2model",
+          "type": "OMNIGEN2MODEL",
+          "link": 21
+        },
+        {
+          "name": "image1",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 19
+        },
+        {
+          "name": "image2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "image3",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "neverbiasu/ComfyUI-OmniGen2",
+        "ver": "unknown",
+        "Node name for S&R": "OmniGen2Sampler"
+      },
+      "widgets_values": [
+        "Change the dress to blue.",
+        1024,
+        1024,
+        "euler",
+        50,
+        5,
+        2,
+        0,
+        1,
+        1,
+        102,
+        "randomize",
+        "(((deformed))), blurry, over saturation, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar",
+        1024,
+        1048576
+      ]
+    }
+  ],
+  "links": [
+    [
+      19,
+      3,
+      0,
+      12,
+      1,
+      "IMAGE"
+    ],
+    [
+      20,
+      12,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      21,
+      1,
+      0,
+      12,
+      0,
+      "OMNIGEN2MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6830134553650707,
+      "offset": [
+        -208.5,
+        -99.5
+      ]
+    },
+    "frontendVersion": "1.21.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
