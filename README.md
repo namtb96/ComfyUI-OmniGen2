@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="OmniGen2/assets/brand.png" width="60%">
+</p>
+
 # ComfyUI-OmniGen2
 
 A ComfyUI custom node package for the [OmniGen2](https://github.com/VectorSpaceLab/OmniGen2) multimodal generation model.
@@ -19,11 +23,7 @@ OmniGen2 is an open-source, state-of-the-art multimodal generative model support
 ## Features
 
 - **Easy Model Loading**: Load models from local folders or HuggingFace with auto-download and correct folder structure
-- **Flexible Precision**: Choose between FP32, FP16, or BF16 for optimal speed and memory usage
 - **CPU Offload Support**: Enable sequential or model offload for low-VRAM environments
-- **ComfyUI Native Compatibility**: All node types, input/output, and tooltips follow ComfyUI conventions
-- **Robust Image Handling**: Automatic conversion between ComfyUI IMAGE tensors and PIL.Image for seamless workflow integration
-- **Batch and Collage Output**: Supports single or multi-image output, with automatic collage creation for multi-image results
 
 ---
 
@@ -78,12 +78,15 @@ Restart ComfyUI to load the new nodes.
 ## Usage
 
 ### Text-to-Image Generation
-- Add the `OmniGen2ModelLoader` node to load the model (choose precision and offload options as needed)
-- Connect to the `OmniGen2Sampler` node
+
+![](example_workflows/omnigen2_text_to_image01.png)
+
 - Set your prompt, image size, and other parameters
-- Run the workflow to generate images from text
 
 ### Image Editing / In-Context Generation
+
+![](example_workflows/omnigen2_image_editing01.png)
+
 - Provide one or more input images to the `OmniGen2Sampler` node
 - Use the prompt to describe the desired edit or composition
 - Adjust `image_guidance_scale` for more/less faithfulness to the input image(s)
