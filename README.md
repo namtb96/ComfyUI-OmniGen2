@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="OmniGen2/assets/brand.png" width="60%">
+  <img src="assets/brand.png" width="60%">
 </p>
 
 # ComfyUI-OmniGen2
