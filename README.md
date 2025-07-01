@@ -8,6 +8,15 @@ A ComfyUI custom node package for the [OmniGen2](https://github.com/VectorSpaceL
 
 ---
 
+**Notice: This project is no longer maintained.**
+
+ComfyUI-OmniGen2 is archived because official support for OmniGen2 has been added to ComfyUI (see commit ec70ed6aea05c3a380ad0e15d8221c7bf61be7bb). Please refer to the official implementation and tutorial for the latest usage:
+
+- Official implementation: https://github.com/comfyanonymous/ComfyUI/commit/ec70ed6aea05c3a380ad0e15d8221c7bf61be7bb
+- Official tutorial: https://docs.comfy.org/tutorials/image/omnigen/omnigen2
+
+We recommend using the official nodes and documentation for better compatibility and future support.
+
 ## About OmniGen2
 
 OmniGen2 is an open-source, state-of-the-art multimodal generative model supporting text-to-image, image editing, in-context generation, and visual understanding. It features decoupled text/image decoding, robust visual reasoning, and efficient inference with advanced offloading and quantization options. OmniGen2 achieves competitive results on both understanding and generation tasks, and is designed for research and creative applications.
