@@ -5,37 +5,6 @@
   "last_link_id": 21,
   "nodes": [
     {
-      "id": 6,
-      "type": "SaveImage",
-      "pos": [
-        879.92578125,
-        80
-      ],
-      "size": [
-        270,
-        270
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 20
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.3.40",
-        "Node name for S&R": "SaveImage"
-      },
-      "widgets_values": [
-        "OmniGen2"
-      ]
-    },
-    {
       "id": 1,
       "type": "OmniGen2ModelLoader",
       "pos": [
@@ -44,7 +13,7 @@
       ],
       "size": [
         329.92578125,
-        154
+        226
       ],
       "flags": {},
       "order": 0,
@@ -69,7 +38,41 @@
         "bf16",
         false,
         false,
+        false,
+        0.05,
+        false,
         false
+      ]
+    },
+    {
+      "id": 6,
+      "type": "SaveImage",
+      "pos": [
+        879.92578125,
+        80
+      ],
+      "size": [
+        480.9090881347656,
+        461.81817626953125
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 20
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.40",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "OmniGen2"
       ]
     },
     {
@@ -80,8 +83,8 @@
         80
       ],
       "size": [
-        400,
-        484
+        418.18182373046875,
+        595.8181762695312
       ],
       "flags": {},
       "order": 1,
@@ -126,7 +129,7 @@
         "Node name for S&R": "OmniGen2Sampler"
       },
       "widgets_values": [
-        "A snow maiden with pale translucent skin, frosty white lashes, and a soft expression of longing",
+        "Floating market on the clouds at sunset, wooden boats decorated with glowing lanterns carrying exotic fruits. Cute little winged creatures are flying between the boats, trading goods. Art style of Studio Ghibli, warm colors, magical and peaceful atmosphere, highly detailed.",
         1024,
         1024,
         "euler",
@@ -136,7 +139,7 @@
         0,
         1,
         1,
-        1154,
+        226,
         "randomize",
         "(((deformed))), blurry, over saturation, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar",
         1024,
@@ -166,13 +169,13 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.751314800901578,
+      "scale": 1.1,
       "offset": [
-        50,
-        20
+        21.642818181818345,
+        32.189636363636396
       ]
     },
-    "frontendVersion": "1.21.7",
+    "frontendVersion": "1.23.4",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,
