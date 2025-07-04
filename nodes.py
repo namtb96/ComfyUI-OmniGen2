@@ -8,6 +8,7 @@ from datetime import datetime
 from torchvision.transforms.functional import to_tensor
 from PIL import Image
 import numpy as np
+from transformers import CLIPProcessor
 
 from accelerate import Accelerator
 from omnigen2.pipelines.omnigen2.pipeline_omnigen2 import OmniGen2Pipeline
@@ -50,6 +51,9 @@ class OmniGen2ModelLoader(ComfyNodeABC):
                 "dtype": ("STRING", {"default": "bf16", "choices": ["fp32", "fp16", "bf16"], "tooltip": "Precision for inference"}),
                 "enable_sequential_cpu_offload": ("BOOLEAN", {"default": False, "tooltip": "Sequential CPU offload"}),
                 "enable_model_cpu_offload": ("BOOLEAN", {"default": False, "tooltip": "Model CPU offload"}),
+                "enable_teacache": ("BOOLEAN", {"default": False, "tooltip": "Enable TeaCache"}),
+                "teacache_rel_l1_thresh": ("FLOAT", {"default": 0.05, "tooltip": "Relative L1 threshold for teacache."}),
+                "enable_taylorseer": ("BOOLEAN", {"default": False, "tooltip": "Enable TaylorSeer"}),
             },
             "optional": {
                 "enable_group_offload": ("BOOLEAN", {"default": False, "tooltip": "Group offload (if supported)"}),
@@ -66,7 +70,7 @@ class OmniGen2ModelLoader(ComfyNodeABC):
         model_list = folder_paths.get_filename_list("omnigen2")
         return {"repo_id": {"choices": model_list}}
 
-    def load(self, repo_id, dtype, enable_sequential_cpu_offload, enable_model_cpu_offload, enable_group_offload=False):
+    def load(self, repo_id, dtype, enable_sequential_cpu_offload, enable_model_cpu_offload, enable_group_offload=False, enable_teacache = False, enable_taylorseer = False, teacache_rel_l1_thresh = 0.05):
         local_name = repo_id.split('/')[-1]
         model_dir = os.path.join(OMNIGEN2_MODEL_DIR, local_name)
         if not os.path.isdir(model_dir):
@@ -92,6 +96,11 @@ class OmniGen2ModelLoader(ComfyNodeABC):
         accelerator = Accelerator(mixed_precision=dtype)
         pipeline = OmniGen2Pipeline.from_pretrained(
             model_dir,
+            processor=CLIPProcessor.from_pretrained(
+                model_dir,
+                subfolder="processor",
+                use_fast=True
+            ),
             torch_dtype=weight_dtype,
             trust_remote_code=True,
         )
@@ -100,6 +109,12 @@ class OmniGen2ModelLoader(ComfyNodeABC):
             subfolder="transformer",
             torch_dtype=weight_dtype,
         )
+        if enable_taylorseer:
+            pipeline.enable_taylorseer = True
+        elif enable_teacache:
+            pipeline.transformer.enable_teacache = True
+            pipeline.transformer.teacache_rel_l1_thresh = teacache_rel_l1_thresh
+
         if enable_sequential_cpu_offload:
             pipeline.enable_sequential_cpu_offload()
         elif enable_model_cpu_offload:
@@ -187,10 +202,8 @@ class OmniGen2Sampler(ComfyNodeABC):
             output_type="pil",
             step_func=progress_callback,
         )
-        vis_images = [pil_to_tensor(image) * 2 - 1 for image in results.images]
-        output_image = vis_images[0] if len(vis_images) == 1 else create_collage(vis_images)
-        if isinstance(output_image, Image.Image):
-            output_image = pil_to_tensor(output_image) * 2 - 1
+        output_images = [pil_to_tensor(image) for image in results.images]
+        output_image = torch.cat(output_images, dim=0)
         return (output_image,)
 
 NODE_CLASS_MAPPINGS = {
