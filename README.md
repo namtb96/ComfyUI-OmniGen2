@@ -6,6 +6,9 @@
 
 A ComfyUI custom node package for the [OmniGen2](https://github.com/VectorSpaceLab/OmniGen2) multimodal generation model.
 
+2025-07-04: 
+  - fix dark image on generation
+  - add TeaCache + TaylorSeer support
 ---
 
 ## About OmniGen2
